@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jSpreadsheet Example</title>
+    <script>
+        // Function to initialize jspreadsheet
+        function initialize() {
+            var changed = function(instance, cell, x, y, value) {
+                var cellName = jspreadsheet.getColumnNameFromId([x, y]);
+                console.log('New change on cell ' + cellName + ' to: ' + value);
+            };
+
+            var data = [
+                ['Mazda', 2001, 2000, '2006-01-01'],
+                ['Pegeout', 2010, 5000, '2005-01-01'],
+                ['Honda Fit', 2009, 3000, '2004-01-01'],
+                ['Honda CRV', 2010, 6000, '2003-01-01'],
+            ];
+
+            jspreadsheet(document.getElementById('spreadsheet'), {
+                data: data,
+                rowResize: true,
+                columnDrag: true,
+                columns: [
+                    { type: 'text', width: '200' },
+                    { type: 'text', width: '100' },
+                    { type: 'text', width: '100' },
+                    { type: 'calendar', width: '100' },
+                ],
+                onchange: changed,
+                lazyLoading: true
+            });
+        }
+    </script>
+    <script src="" onload="initialize()"></script>
+</head>
+<body>
+<div id="spreadsheet"></div>
+</body>
+</html>
